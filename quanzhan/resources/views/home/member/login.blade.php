@@ -22,7 +22,7 @@
                 <a href="javascript:;" class="logo">
                 <img src="{{asset('homes')}}/img/asset-logoico.png" alt="logo" width="200">
             </a>
-                <div class="go-regist" style="position: absolute;border-bottom: 10px;">还没有账号？<a href="#">去注册</a></div>
+                <div class="go-regist" style="position: absolute;border-bottom: 10px;">还没有账号？<a href="/register">去注册</a></div>
             </div>
         </div>
         <div class="register-body">

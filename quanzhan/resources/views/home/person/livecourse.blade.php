@@ -23,14 +23,13 @@
                 <div class="navbar-left"><img src="{{asset('homes')}}/img/asset-logoIco.png" alt=""></div>
                 <div class="navbar-left">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="travel.index.html" target="_blank">首页</a></li>
-                        <li><a href="#">课程</a></li>
-                        <li><a href="#">职业测评</a></li>
-                        <li><a href="#">学习中心</a></li>
+                        <li class="active"><a href="/" target=''>首页</a></li>
+                        <li><a href="{{url('person/livecourse')}}">直播</a></li>
+                        <li><a href="{{url('/person/paper')}}">职业测评</a></li>
                     </ul>
                 </div>
                 <div class="navbar-left"><input type="text" class="input-search" placeholder="输入查询关键词"><input type="submit" class="search-buttom"></div>
-                <div class="navbar-right"><a href="#">登录</a><a href="#">注册</a></div>
+                <div class="navbar-right"><a href="/login">登录</a><a href="#">注册</a></div>
             </nav>
         </div>
     </header>

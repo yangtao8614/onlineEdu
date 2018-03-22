@@ -33,28 +33,41 @@
 		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="">
 		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="stream_add()" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加直播流</a></span> <span class="r">共有数据：<strong>{{count($stream)}}</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="privilege_add()" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>{{count($manager)}}</strong> 条</span> </div>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
-				<th scope="col" colspan="9">员工列表</th>
+				<th scope="col" colspan="12">权限列表</th>
 			</tr>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="40">ID</th>
-				<th width="150">直播流名称</th>
-				<th width="130">加入时间</th>
+				<th width="30">ID</th>
+				<th width="150" style="text-align: left;">用户名</th>
+				<th width="90">email</th>
+				<th width="150">城市</th>
+				<th>地址</th>
+				<th width="150">简介</th>
+				<th width="100">公司</th>
+				<th width="100">联系方式</th>
+				{{--<th width="100">角色</th>--}}
 				<th width="100">操作</th>
+				{{--<th width="100">角色</th>--}}
 			</tr>
 		</thead>
 		<tbody>
-		@foreach($stream as $v)
+		@foreach($manager as $v)
 			<tr class="text-c">
 				<td><input type="checkbox" value="1" name=""></td>
 				<td>{{$v->id}}</td>
-				<td>{{$v->stream_name}}</td>
-				<td>{{$v->created_at}}</td>
-				<td class="td-manage"><a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<td>{{$v->username}}</td>
+				<td>{{$v->email}}</td>
+				<td>{{$v->city}}</td>
+				<td>{{$v->address}}</td>
+				<td>{{$v->intro}}</td>
+				<td>{{$v->company}}</td>
+				<td>{{$v->phone}}</td>
+				{{--<td>{{$v->role->role_name}}</td>--}}
+				<td class="td-manage"><a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
 		@endforeach	
 		</tbody>
@@ -79,9 +92,9 @@
 	w		弹出层宽度（缺省调默认值）
 	h		弹出层高度（缺省调默认值）
 */
-/*直播流-增加*/
-function stream_add(){
-	layer_show('添加直播流','{{url("admin/stream/add")}}');
+/*权限-增加*/
+function privilege_add(){
+	layer_show('添加管理员','{{url("admin/manager/add")}}');
 }
 /*管理员-删除*/
 function admin_del(obj,id){

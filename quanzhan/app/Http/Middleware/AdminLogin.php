@@ -23,7 +23,7 @@ class AdminLogin
         }
         //获取管理员的id;
         $id = Auth::guard('admin')->user()->id;
-        
+
         if($id!=1){
             //排除掉后台首页控制器和登录控制器；
             if(getController_name()!='Index' && getController_name()!='Manager'){
@@ -42,8 +42,8 @@ class AdminLogin
                     exit('你无权操作');
                 }
             }
-           
-        }  
+
+        }
         return $next($request);
     }
 }

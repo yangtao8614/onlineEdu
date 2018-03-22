@@ -15,6 +15,15 @@ class MemberController extends Controller
     	return view('home.member.login');
     }
 
+    public function register(Request $request)
+    {
+        if ($request->isMethod('get')){
+            return view('home.member.register');
+        }else if($request->isMethod('pots')){
+            echo 1;
+        }
+    }
+
     //完成登录的验证
     public function login_check(Request $request){
     	//数据验证功能

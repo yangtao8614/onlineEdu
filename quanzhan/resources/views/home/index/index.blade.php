@@ -24,14 +24,13 @@
                 <div class="navbar-left"><img src="{{asset('homes')}}/img/asset-logoIco.png" alt=""></div>
                 <div class="navbar-left">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="travel.index.html" target="_blank">首页</a></li>
-                        <li><a href="#">课程</a></li>
-                        <li><a href="#">职业测评</a></li>
-                        <li><a href="#">学习中心</a></li>
+                        <li class="active"><a href="/" target=''>首页</a></li>
+                        <li><a href="{{url('person/livecourse')}}">直播</a></li>
+                        <li><a href="{{url('/person/paper')}}">职业测评</a></li>
                     </ul>
                 </div>
                 <div class="navbar-left"><input type="text" class="input-search" placeholder="输入查询关键词"><input type="submit" class="search-buttom"></div>
-                <div class="navbar-right"><a href="#">登录</a><a href="#">注册</a></div>
+                <div class="navbar-right"><a href="/login">登录</a><a href="/register">注册</a></div>
             </nav>
         </div>
     </header>
@@ -62,71 +61,21 @@
     </div>
     <div class="container">
         <!--左侧列表导航-->
-        <div class="travel-index-nav">
+        <div class="travel-index-nav" style="height: 400px">
             <div class="citylistbox">
                 <div class="title text-center">全部分类课程</div>
+                @foreach($course as $v)
                 <div class="listbox">
                     <div class="list">
-                        <dl><dt>编程入门</dt></dl>
+                        <dl><dt>{{$v->course_name}}</dt></dl>
                     </div>
-                    <div class="box">编程入门编程入门编程入门编程入门编程入门编程入门编程入门编程入门编程入门</div>
-                </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl><dt>数据分析师</dt></dl>
+                    <div class="box">
+                        @foreach($v->lesson as $vv)
+                            {{$vv->lesson_name}}<br>
+                        @endforeach
                     </div>
-                    <div class="box">机器学习工程师</div>
                 </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl>
-                            <dt>机器学习工程师</dt>
-                        </dl>
-                    </div>
-                    <div class="box">机器学习工程师</div>
-                </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl><dt>人工智能工程师</dt></dl>
-                    </div>
-                    <div class="box">人工智能工程师</div>
-                </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl><dt>全栈工程师</dt></dl>
-                    </div>
-                    <div class="box">全栈工程师</div>
-                </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl><dt> iOS工程师</dt></dl>
-                    </div>
-                    <div class="box">iOS工程师</div>
-                </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl><dt> VR 开发者</dt></dl>
-                    </div>
-                    <div class="box"> VR 开发者</div>
-                </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl><dt>商业预测分析师</dt></dl>
-                    </div>
-                    <div class="box">商业预测分析师</div>
-                </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl><dt> Java 工程师</dt></dl>
-                    </div>
-                    <div class="box"> Java 工程师</div>
-                </div>
-                <div class="listbox">
-                    <div class="list">
-                        <dl><dt> 前端开发工程师</dt></dl>
-                    </div>
-                    <div class="box">前端开发工程师</div>
-                </div>
+                @endforeach
             </div>
         </div>
         <div class="recommend-list">
@@ -143,7 +92,7 @@
         </div>
         <div class="conten-list">
             @foreach($course as $v)
-            <div class="conten" id="a">
+            <div class="conten" id="{{$v->id}}">
                 <div class="row text-center top">
                     <div class="col-lg-3 text-left" id="Title">{{$v->course_name}}</div>
                     <div class="col-lg-5 ">
@@ -162,12 +111,12 @@
                         <div class="prev glyphicon glyphicon-chevron-left"></div>
                         <div class="cont-list-box">
                         @foreach($v->lesson as $vv)
-                            <li class="">
-                                <img src="{{$vv->cover_img}}" alt="AA">
-                                <div class="tit">{{$vv->lesson_name}} <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
+                                <a href="{{ url('home/live/detail') . '?id='.$vv->id }}" target="_blank">
+                                    <li class="">
+                                        <img src="{{$vv->cover_img}}" alt="AA">
+                                        <div class="tit">{{$vv->lesson_name}} <span>高</span></div>
+                                    </li>
+                                </a>
                         @endforeach
 
                         </div>
@@ -177,318 +126,6 @@
 
             @endforeach
 
-            <div class="conten" id="f">
-                <div class="row text-center top">
-                    <div class="col-lg-3 text-left" id="Title">数据分析师</div>
-                    <div class="col-lg-5 ">
-                        <div class="btn-group btn-group-justified">
-                            <a href="#" class="btn btn-primary active">热 门</a>
-                            <a href="#" class="btn btn-primary">初 级</a>
-                            <a href="#" class="btn btn-primary">中 级</a>
-                            <a href="#" class="btn btn-primary">高 级</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 text-right"><a href="#" class="btn btn-default ck-all">查看全部</a></div>
-                </div>
-                <div class="container cont-list">
-                    <div class="cont-list-roll">
-                        <div class="next glyphicon glyphicon-chevron-right"></div>
-                        <div class="prev glyphicon glyphicon-chevron-left"></div>
-                        <div class="cont-list-box">
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/page-1.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-2.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-3.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-4.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-5.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="conten" id="g">
-                <div class="row text-center top">
-                    <div class="col-lg-3 text-left" id="Title">机器学习工程师</div>
-                    <div class="col-lg-5 ">
-                        <div class="btn-group btn-group-justified">
-                            <a href="#" class="btn btn-primary active">热 门</a>
-                            <a href="#" class="btn btn-primary">初 级</a>
-                            <a href="#" class="btn btn-primary">中 级</a>
-                            <a href="#" class="btn btn-primary">高 级</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 text-right"><a href="#" class="btn btn-default ck-all">查看全部</a></div>
-                </div>
-                <div class="container cont-list">
-                    <div class="cont-list-roll">
-                        <div class="next glyphicon glyphicon-chevron-right"></div>
-                        <div class="prev glyphicon glyphicon-chevron-left"></div>
-                        <div class="cont-list-box">
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/page-1.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-2.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-3.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-4.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-5.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="conten" id="h">
-                <div class="row text-center top">
-                    <div class="col-lg-3 text-left" id="Title">前端开发工程师</div>
-                    <div class="col-lg-5 ">
-                        <div class="btn-group btn-group-justified">
-                            <a href="#" class="btn btn-primary active">热 门</a>
-                            <a href="#" class="btn btn-primary">初 级</a>
-                            <a href="#" class="btn btn-primary">中 级</a>
-                            <a href="#" class="btn btn-primary">高 级</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 text-right"><a href="#" class="btn btn-default ck-all">查看全部</a></div>
-                </div>
-                <div class="container cont-list">
-                    <div class="cont-list-roll">
-                        <div class="next glyphicon glyphicon-chevron-right"></div>
-                        <div class="prev glyphicon glyphicon-chevron-left"></div>
-                        <div class="cont-list-box">
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/page-1.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-2.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-3.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-4.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-5.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="conten" id="i">
-                <div class="row text-center top">
-                    <div class="col-lg-3 text-left" id="Title">人工智能工程师</div>
-                    <div class="col-lg-5 ">
-                        <div class="btn-group btn-group-justified">
-                            <a href="#" class="btn btn-primary active">热 门</a>
-                            <a href="#" class="btn btn-primary">初 级</a>
-                            <a href="#" class="btn btn-primary">中 级</a>
-                            <a href="#" class="btn btn-primary">高 级</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 text-right"><a href="#" class="btn btn-default ck-all">查看全部</a></div>
-                </div>
-                <div class="container cont-list">
-                    <div class="cont-list-roll">
-                        <div class="next glyphicon glyphicon-chevron-right"></div>
-                        <div class="prev glyphicon glyphicon-chevron-left"></div>
-                        <div class="cont-list-box">
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/page-1.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-2.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-3.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-4.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-5.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="conten" id="j">
-                <div class="row text-center top">
-                    <div class="col-lg-3 text-left" id="Title">数据分析师</div>
-                    <div class="col-lg-5 ">
-                        <div class="btn-group btn-group-justified">
-                            <a href="#" class="btn btn-primary active">热 门</a>
-                            <a href="#" class="btn btn-primary">初 级</a>
-                            <a href="#" class="btn btn-primary">中 级</a>
-                            <a href="#" class="btn btn-primary">高 级</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 text-right"><a href="#" class="btn btn-default ck-all">查看全部</a></div>
-                </div>
-                <div class="container cont-list">
-                    <div class="cont-list-roll">
-                        <div class="next glyphicon glyphicon-chevron-right"></div>
-                        <div class="prev glyphicon glyphicon-chevron-left"></div>
-                        <div class="cont-list-box">
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/page-1.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-2.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-3.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-4.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-5.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="conten" id="k">
-                <div class="row text-center top">
-                    <div class="col-lg-3 text-left" id="Title">机器学习工程师</div>
-                    <div class="col-lg-5 ">
-                        <div class="btn-group btn-group-justified">
-                            <a href="#" class="btn btn-primary active">热 门</a>
-                            <a href="#" class="btn btn-primary">初 级</a>
-                            <a href="#" class="btn btn-primary">中 级</a>
-                            <a href="#" class="btn btn-primary">高 级</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 text-right"><a href="#" class="btn btn-default ck-all">查看全部</a></div>
-                </div>
-                <div class="container cont-list">
-                    <div class="cont-list-roll">
-                        <div class="next glyphicon glyphicon-chevron-right"></div>
-                        <div class="prev glyphicon glyphicon-chevron-left"></div>
-                        <div class="cont-list-box">
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/page-1.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-2.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-3.jpg" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-4.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                            <li class="">
-                                <img src="{{asset('homes')}}/img/widget-5.png" alt="AA">
-                                <div class="tit">程序设计语言 <span>高</span></div>
-                                <div>武汉大学</div>
-                                <div>1门课程</div>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="index-cont-nav">
@@ -497,16 +134,9 @@
                 <div class="logo-ico"><img src="{{asset('homes')}}/img/asset-logoIco.png" alt=""></div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#a">编程入门</a></li>
-                    <li><a href="#b">数据分析师</a></li>
-                    <li><a href="#c">机器学习工程师</a></li>
-                    <li><a href="#d">前端开发工程师</a></li>
-                    <li><a href="#e">人工智能工程师</a></li>
-                    <li><a href="#f">全栈工程师</a></li>
-                    <li><a href="#g">iOS工程师</a></li>
-                    <li><a href="#h">VR开发者</a></li>
-                    <li><a href="#i">深度学习</a></li>
-                    <li><a href="#j">商业预测分析师</a></li>
-                    <li><a href="#k">Android开发工程师</a></li>
+                    @foreach($course as $v)
+                        <li class="active"><a href="#{{ $v->id }}">{{ $v->course_name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

@@ -27,7 +27,7 @@ class OrderController extends Controller
 		]);
 		//入库it_order_course表；
 		/*
-			id int primary key auto_increment,	
+			id int primary key auto_increment,
         order_id int(11) NOT NULL COMMENT '订单id',
         course_id int(11) NOT NULL COMMENT '课程id',
         course_price decimal(7,2) NOT NULL COMMENT '课程价格'
@@ -51,9 +51,10 @@ class OrderController extends Controller
         $total_amount = 0.01;
         //商品描述，可空
         $body = 'macbook pro2';
+        $enable_pay_channels = 'pcredit';
 
         $customData = json_encode(['model_name' => 'ewrwe', 'id' => 121]);//自定义参数
-        $response = Alipay::tradePagePay($subject, $body, $out_trade_no, $total_amount, $customData);
+        $response = Alipay::tradePagePay($subject, $body, $out_trade_no, $total_amount, $customData,$enable_pay_channels);
         //输出表单
         return $response['redirect_url'];
 

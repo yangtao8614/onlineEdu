@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Manager;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Role;
 use Validator;
 use Auth;
 class ManagerController extends Controller
 {
+
+    public function index()
+    {
+        $manager = Manager::all();
+//        dd($manager);
+        return view('admin.manager.index', compact('manager'));
+
+    }
     //显示登录页面
     public function login(){
     	return view('admin.manager.login');
@@ -53,5 +63,48 @@ class ManagerController extends Controller
     public function logout(){
     	Auth::guard('admin')->logout();
     	return redirect('admin/login');
+    }
+
+    public function add(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            //展示表单
+            //取出课时数据
+            $role = Role::all();
+            return view('admin.manager.add', compact('role'));
+        } else if ($request->isMethod('post')) {
+            //接收提交的表单，完成入库的。
+            //数据验证，
+            //定义验证规则
+            $data = $request->all();
+//            return ['data'=>$data];
+            $rules = [
+                'username' => 'required',
+                'password' => 'required',
+            ];
+            //定义错误提示
+            $msg = [
+                'username.required' => '用户名不能为空',
+                'password.required' => '密码不能为空'
+
+            ];
+            $validator = Validator::make($data, $rules, $msg);//返回一个对象
+            if ($validator->passes()) {
+                //通过验证,入库操作；
+                //DB::table('lesson')->insert();
+                $data['password'] = bcrypt($data['password']);
+                $res = Manager::create($data);//返回值添加的当前记录封装的对象
+                if ($res) {
+                    return ['info' => 1];
+                } else {
+                    return ['info' => 0, 'error' => '入库失败'];
+                }
+            } else {
+                //未通过验证
+                //$error =  $validator->messages();//调用对象的messages()方法，输出错误提示;
+                $error = collect($validator->messages())->implode('0', ',');
+                return ['info' => 0, 'error' => $error];
+            }
+        }
     }
 }

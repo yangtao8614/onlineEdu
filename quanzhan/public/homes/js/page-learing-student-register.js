@@ -33,22 +33,29 @@ $('.send').click(function(){
 
 /*注册按钮*/
 $('[name=register]').click(function(){
+    var username = $('#username');
 	var phone = $('[name=phone]');
-	var verif = $('[name=verif]');
+
+    // var verif = $('[name=verif]');
 	var password = $('[name=password]');
 	var confirm = $('[name=confirm]');
 	/*var ret = /^1[34578]\d{9}$/;
 	alert(ret.test(phone.val()));*/
+    if(username.val() == ""){
+        username.siblings('.verif-span').show().text('用户名不能为空');
+    }else{
+        username.siblings('.verif-span').hide();
+    }
 	if(phone.val() == ""){
 		phone.siblings('.verif-span').show().text('手机号不能为空');
 	}else{
 		phone.siblings('.verif-span').hide();
 	}
-	if(verif.val() == ""){
-		verif.siblings('.verif-span').show().text('验证码不能为空');;
-	}else{
-		verif.siblings('.verif-span').hide();
-	}
+	// if(verif.val() == ""){
+	// 	verif.siblings('.verif-span').show().text('验证码不能为空');;
+	// }else{
+	// 	verif.siblings('.verif-span').hide();
+	// }
 	if(password.val() == ""){
 		password.siblings('.verif-span').show().text('密码不能为空');;
 	}else{
@@ -59,4 +66,8 @@ $('[name=register]').click(function(){
 	}else{
 		confirm.siblings('.verif-span').hide();
 	}
+
+	console.log()
 });
+
+
